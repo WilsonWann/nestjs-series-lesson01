@@ -11,10 +11,10 @@ import { HttpExceptionFilter } from './filter/http-exception/http-exception.filt
   controllers: [AppController],
   providers: [
     AppService,
-    {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
-    }
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: HttpExceptionFilter,
+    // }
   ],
 })
 export class AppModule { }
