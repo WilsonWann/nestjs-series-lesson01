@@ -8,9 +8,10 @@ import { HttpExceptionFilter } from './filter/http-exception/http-exception.filt
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { HelloWorldMiddleware } from './middleware/hello-world/hello-world.middleware';
 import { AddUserMiddleware } from './middleware/add-user/add-user.middleware';
+import { ConfigurationModule } from './common/configuration/configuration.module';
 
 @Module({
-  imports: [UsersModule, TestModule],
+  imports: [UsersModule, TestModule, ConfigurationModule],
   controllers: [AppController],
   providers: [
     AppService,
