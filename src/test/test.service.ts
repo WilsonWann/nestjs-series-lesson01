@@ -4,7 +4,6 @@ import { of } from 'rxjs';
 type dataType = {
   name: string
   author: string
-  id: number
 }
 
 @Injectable()
@@ -41,14 +40,16 @@ export class TestService {
   }
 
   addData(data: dataType) {
-    return of(this.data.push(data));
+    const count = this.data.length
+    return of(this.data.push({
+      name: data.name,
+      author: data.author,
+      id: count + 1,
+    }));
   }
 
   updateData(id: number, data: dataType) {
     const foundDataIndex = this.data.findIndex(data => data.id === id)
-    console.log("🚀 -----------------------------------------------------------------------------------------🚀")
-    console.log("🚀 ~ file: test.service.ts:49 ~ TestService ~ updateData ~ foundDataIndex:", foundDataIndex)
-    console.log("🚀 -----------------------------------------------------------------------------------------🚀")
     if (foundDataIndex === -1) return
     let foundData = this.data.find(data => data.id === id)
     foundData = {

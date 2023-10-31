@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Patch, Delete, Param, Body, Response, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Param, Body, Response, HttpStatus, UsePipes } from '@nestjs/common';
 import { TestService } from './test.service';
+import { TestPipe } from './test.pipe';
+import { CreateTestDto } from './create-test.dto';
 
 @Controller('test')
 export class TestController {
@@ -20,8 +22,9 @@ export class TestController {
   }
 
   @Post()
-  addData(@Response() res, @Body() data) {
-    this.testService.addData(data).subscribe(response => {
+  @UsePipes(TestPipe)
+  addData(@Response() res, @Body() document: CreateTestDto) {
+    this.testService.addData(document).subscribe(response => {
       res.status(HttpStatus.CREATED).json(response)
     })
   }
