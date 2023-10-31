@@ -11,7 +11,13 @@ import { AddUserMiddleware } from './middleware/add-user/add-user.middleware';
 import { ConfigurationModule } from './common/configuration/configuration.module';
 
 @Module({
-  imports: [UsersModule, TestModule, ConfigurationModule],
+  imports: [
+    UsersModule,
+    TestModule,
+    ConfigurationModule.forRoot({
+      path: `../${process.env.NODE_ENV || 'development'}.env`
+    })
+  ],
   controllers: [AppController],
   providers: [
     AppService,
@@ -29,16 +35,3 @@ export class AppModule implements NestModule {
       .forRoutes('');
   }
 }
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer
-//       .apply(
-//         LoggerMiddleware,
-//         HelloWorldMiddleware
-//       )
-//       .forRoutes(
-//         { path: '/test', method: RequestMethod.POST },
-//         { path: '/', method: RequestMethod.GET },
-//       )
-//   }
-// }

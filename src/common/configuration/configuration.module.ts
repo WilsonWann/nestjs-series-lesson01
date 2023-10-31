@@ -14,6 +14,9 @@ export class ConfigurationModule {
         },
         ConfigurationService
       ],
+      exports: [
+        ConfigurationService
+      ],
       module: ConfigurationModule,
       global: true
     }
