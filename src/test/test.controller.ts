@@ -1,12 +1,14 @@
-import { ValidationPipe, HttpException, Controller, Get, Post, Patch, Delete, Param, Body, Response, HttpStatus, UsePipes, UseFilters, NotAcceptableException, UseInterceptors } from '@nestjs/common';
+import { ValidationPipe, HttpException, Controller, Get, Post, Patch, Delete, Param, Body, Response, HttpStatus, UsePipes, UseFilters, NotAcceptableException, UseInterceptors, UseGuards } from '@nestjs/common';
 import { TestService } from './test.service';
 import { TestPipe } from '../pipe/test/test.pipe';
 import { CreateTestDto } from '../dto/create-test.dto';
 import { ParseIntPipe } from 'src/pipe/parse-int/parse-int.pipe';
 import { ValidationError } from 'class-validator';
 import { HelloWordInterceptor } from 'src/interceptor/hello-word/hello-word.interceptor';
+import { AuthGuard } from 'src/guard/auth/auth.guard';
 
 @Controller('test')
+@UseGuards(AuthGuard)
 @UseInterceptors(HelloWordInterceptor)
 export class TestController {
   constructor(private readonly testService: TestService) { }
