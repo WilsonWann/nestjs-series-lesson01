@@ -1,6 +1,6 @@
 import { HttpException, Controller, Get, Post, Patch, Delete, Param, Body, Response, HttpStatus, UsePipes, UseFilters } from '@nestjs/common';
 import { TestService } from './test.service';
-import { TestPipe } from './test.pipe';
+import { TestPipe } from '../pipe/test/test.pipe';
 import { CreateTestDto } from '../dto/create-test.dto';
 import { ParseIntPipe } from 'src/pipe/parse-int/parse-int.pipe';
 
