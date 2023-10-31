@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Param, Body, Response, HttpStatus, UsePipes } from '@nestjs/common';
+import { HttpException, Controller, Get, Post, Patch, Delete, Param, Body, Response, HttpStatus, UsePipes, UseFilters } from '@nestjs/common';
 import { TestService } from './test.service';
 import { TestPipe } from './test.pipe';
 import { CreateTestDto } from './create-test.dto';
