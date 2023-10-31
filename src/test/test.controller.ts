@@ -2,6 +2,7 @@ import { Controller, Get, Post, Patch, Delete, Param, Body, Response, HttpStatus
 import { TestService } from './test.service';
 import { TestPipe } from './test.pipe';
 import { CreateTestDto } from './create-test.dto';
+import { ParseIntPipe } from 'src/parse-int/parse-int.pipe';
 
 @Controller('test')
 export class TestController {
@@ -15,8 +16,8 @@ export class TestController {
   }
 
   @Get(':id')
-  getData(@Param() params, @Response() res) {
-    this.testService.getData(Number(params.id)).subscribe((response) => {
+  getData(@Param('id', new ParseIntPipe()) id, @Response() res) {
+    this.testService.getData(id).subscribe((response) => {
       res.status(HttpStatus.OK).json(response)
     })
   }
@@ -30,15 +31,15 @@ export class TestController {
   }
 
   @Patch(':id')
-  updateData(@Param() params, @Response() res, @Body() data) {
-    this.testService.updateData(Number(params.id), data).subscribe(response => {
+  updateData(@Param('id', new ParseIntPipe()) id, @Response() res, @Body() data) {
+    this.testService.updateData(id, data).subscribe(response => {
       res.status(HttpStatus.OK).json(response)
     })
   }
 
   @Delete(':id')
-  deleteData(@Param() params, @Response() res) {
-    this.testService.deleteData(Number(params.id)).subscribe(response => {
+  deleteData(@Param('id', new ParseIntPipe()) id, @Response() res) {
+    this.testService.deleteData(id).subscribe(response => {
       res.status(HttpStatus.OK).json(response)
     })
   }
