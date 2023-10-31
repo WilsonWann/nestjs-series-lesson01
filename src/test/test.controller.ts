@@ -7,33 +7,36 @@ export class TestController {
 
   @Get()
   getAllData(@Response() res) {
-    this.testService.getAllData().subscribe((data) => {
-      res.status(HttpStatus.OK).json(data)
+    this.testService.getAllData().subscribe((response) => {
+      res.status(HttpStatus.OK).json(response)
     })
   }
 
-  @Get('/:id')
+  @Get(':id')
   getData(@Param() params, @Response() res) {
-    this.testService.getData(Number(params.id)).subscribe((data) => {
-      res.status(HttpStatus.OK).json(data)
+    this.testService.getData(Number(params.id)).subscribe((response) => {
+      res.status(HttpStatus.OK).json(response)
     })
   }
 
   @Post()
   addData(@Response() res, @Body() data) {
-    this.testService.addData(data).subscribe(data => {
-      res.status(HttpStatus.CREATED).json(data)
+    this.testService.addData(data).subscribe(response => {
+      res.status(HttpStatus.CREATED).json(response)
     })
-    // res.status(HttpStatus.CREATED).json(data)
   }
 
-  @Patch()
+  @Patch(':id')
   updateData(@Param() params, @Response() res, @Body() data) {
-    res.status(HttpStatus.OK).json(data)
+    this.testService.updateData(Number(params.id), data).subscribe(response => {
+      res.status(HttpStatus.OK).json(response)
+    })
   }
 
-  @Delete('/:id')
+  @Delete(':id')
   deleteData(@Param() params, @Response() res) {
-    res.status(HttpStatus.OK).json(document);
+    this.testService.deleteData(Number(params.id)).subscribe(response => {
+      res.status(HttpStatus.OK).json(response)
+    })
   }
 }
