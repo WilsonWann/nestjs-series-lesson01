@@ -2,7 +2,7 @@ import { HttpException, Controller, Get, Post, Patch, Delete, Param, Body, Respo
 import { TestService } from './test.service';
 import { TestPipe } from './test.pipe';
 import { CreateTestDto } from './create-test.dto';
-import { ParseIntPipe } from 'src/parse-int/parse-int.pipe';
+import { ParseIntPipe } from 'src/pipe/parse-int/parse-int.pipe';
 
 @Controller('test')
 export class TestController {
