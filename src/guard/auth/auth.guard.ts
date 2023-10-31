@@ -7,7 +7,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    return of(false)
+    return of(true)
       .pipe(
         delay(2000)
       );

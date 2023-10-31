@@ -7,6 +7,7 @@ import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './filter/http-exception/http-exception.filter';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { HelloWorldMiddleware } from './middleware/hello-world/hello-world.middleware';
+import { AddUserMiddleware } from './middleware/add-user/add-user.middleware';
 
 @Module({
   imports: [UsersModule, TestModule],
@@ -19,16 +20,24 @@ import { HelloWorldMiddleware } from './middleware/hello-world/hello-world.middl
     // }
   ],
 })
+
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(
-        LoggerMiddleware,
-        HelloWorldMiddleware
-      )
-      .forRoutes(
-        { path: '/test', method: RequestMethod.POST },
-        { path: '/', method: RequestMethod.GET },
-      )
+      .apply(AddUserMiddleware)
+      .forRoutes('');
   }
 }
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer
+//       .apply(
+//         LoggerMiddleware,
+//         HelloWorldMiddleware
+//       )
+//       .forRoutes(
+//         { path: '/test', method: RequestMethod.POST },
+//         { path: '/', method: RequestMethod.GET },
+//       )
+//   }
+// }
