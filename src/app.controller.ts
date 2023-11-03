@@ -1,14 +1,21 @@
 import { Controller, Get, Post, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { FileInterceptor, FilesInterceptor, FileFieldsInterceptor, AnyFilesInterceptor } from '@nestjs/platform-express';
+import { AppService } from './app.service';
 
 
 
 @Controller()
 export class AppController {
   constructor(
+    private readonly appService: AppService,
     private readonly configService: ConfigService,
   ) { }
+
+  @Get('/todo')
+  getTodo() {
+    return this.appService.getTodos()
+  }
 
   @Get()
   getUserName() {
